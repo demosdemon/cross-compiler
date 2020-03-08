@@ -12,7 +12,7 @@ export GLIBC_VERSION="2.25"
 export HOST="${MACHTYPE}"
 export TARGET="arm-drobo_$(uname -m)-linux-gnueabi"
 export LC_ALL=POSIX
-export DEST="${HOME}/xtools/toolchain/${TARGET}"
+export DEST="${HOME}/xtools/toolchain/5n"
 
 ### BINUTILS ###
 # https://www.gnu.org/software/binutils/
