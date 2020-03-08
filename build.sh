@@ -33,7 +33,7 @@ fi
 #export NAME="$(basename "${BUILDDIR}")"
 #export DEST="${BUILD_DEST:-/mnt/DroboFS/Shares/DroboApps/${NAME}}"
 export DEPS="${BUILDDIR}/target/install"
-alias make="make -j8 V=1 VERBOSE=1"
+alias make="make -j$(nproc) V=1 VERBOSE=1"
 
 _wget() {
   if [ -z "${CONTINUOUS_INTEGRATION:-}" ]; then
@@ -185,7 +185,7 @@ _package() {
   [[ -d "src/dest" ]] && cp -afR "src/dest"/* "${DEST}"/
   find "${DEST}" -name "._*" -print -delete
   #_create_tgz
-  _create_txz
+  #_create_txz
 }
 
 # Remove all compiled files.

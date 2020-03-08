@@ -1,26 +1,22 @@
-FROM ubuntu:14.04
+FROM debian:buster
 
-MAINTAINER ricardo@droboports.com
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        bison \
+        build-essential \
+        ca-certificates \
+        coreutils \
+        file \
+        gawk \
+        python3 \
+        wget \
+    ; \
+    apt-get clean; \
+    apt-get autoclean; \
+    apt-get autoremove -y; \
+    rm -rf /var/lib/apt/lists/*;
 
-ENV USER_ID 1000
-ENV GROUP_ID 1000
+COPY / /build
 
-RUN set -x; \
-    apt-get -y update && \
-    apt-get -y upgrade && \
-    apt-get -y install build-essential realpath wget gawk && \
-    apt-get clean && \
-    apt-get autoclean
-
-RUN set -x; \
-    groupadd -r -g $GROUP_ID drobo && \
-    useradd -r -u $USER_ID -g drobo -G sudo drobo && \
-    echo drobo:drobo | chpasswd
-
-RUN set -x; \
-    mkdir -p /home/drobo/build && \
-    chown -R drobo:drobo /home/drobo
-
-VOLUME ["/home/drobo/build"]
-
-USER drobo
+RUN /build/build.sh; rm -rf /build;
