@@ -1,15 +1,13 @@
-sudo: false
 language: c
 compiler: gcc
 os: linux
 
 addons:
   apt:
-    packages:
-    - realpath
     sources:
     - ubuntu-toolchain-r-test
     packages:
+    - realpath
     - gcc-4.8
     - g++-4.8
 
